@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Just For You 💗</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: "Trebuchet MS", sans-serif;
+}
+
+/* =========================
+   LIQUID GLASS PINK BACKGROUND
+========================= */
+
+body {
+    background:
+        radial-gradient(circle at 15% 20%, #ffd6ed 0%, transparent 35%),
+        radial-gradient(circle at 85% 25%, #ffc6e4 0%, transparent 35%),
+        radial-gradient(circle at 50% 90%, #ffb9db 0%, transparent 40%),
+        linear-gradient(135deg, #ffd9ed, #ffc4e2, #ffe7f4);
+
+    position: relative;
+}
+
+/* Moving liquid light */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: .45;
+    animation: liquidMove 9s infinite alternate ease-in-out;
+    z-index: 0;
+}
+
+body::before {
+    background: #fff;
+    left: -150px;
+    top: 10%;
+}
+
+body::after {
+    background: #ff8bc6;
+    right: -150px;
+    bottom: 0;
+    animation-delay: 3s;
+}
+
+@keyframes liquidMove {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+
+    to {
+        transform: translate(80px, -50px) scale(1.3);
+    }
+}
+
+
+/* =========================
+   CUTE BACKGROUND
+========================= */
+
+#cuteBackground {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+/* Falling flowers */
+
+.flower {
+    position: absolute;
+    top: -50px;
+    font-size: 20px;
+    animation: fall linear infinite;
+    opacity: .85;
+    filter: drop-shadow(0 2px 5px rgba(255, 100, 180, .25));
+}
+
+@keyframes fall {
+
+    0% {
+        transform:
+            translateY(-60px)
+            rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: .9;
+    }
+
+    50% {
+        transform:
+            translateY(50vh)
+            translateX(35px)
+            rotate(180deg);
+    }
+
+    100% {
+        transform:
+            translateY(115vh)
+            translateX(-40px)
+            rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* Floating hearts */
+
+.heart {
+    position: absolute;
+    bottom: -40px;
+    animation: floatHeart linear infinite;
+    opacity: .55;
+}
+
+@keyframes floatHeart {
+
+    0% {
+        transform: translateY(0) scale(.7);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .7;
+    }
+
+    50% {
+        transform: translateY(-50vh) translateX(30px) scale(1);
+    }
+
+    100% {
+        transform: translateY(-115vh) translateX(-30px) scale(.8);
+        opacity: 0;
+    }
+}
+
+
+/* Sparkles */
+
+.sparkle {
+    position: absolute;
+    animation: sparkle 2s infinite ease-in-out;
+}
+
+@keyframes sparkle {
+
+    0%,100% {
+        opacity: .1;
+        transform: scale(.4) rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.4) rotate(90deg);
+    }
+}
+
+
+/* Bubbles */
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.65);
+    background: rgba(255,255,255,.15);
+    animation: bubbleUp linear infinite;
+}
+
+@keyframes bubbleUp {
+
+    from {
+        transform: translateY(110vh) scale(.7);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: .6;
+    }
+
+    to {
+        transform: translateY(-20vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+
+/* Glowing dots */
+
+.dot {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 15px white;
+    animation: dotFloat 4s infinite ease-in-out;
+}
+
+@keyframes dotFloat {
+
+    0%,100% {
+        opacity: .2;
+        transform: translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-25px);
+    }
+}
+
+
+/* =========================
+   PAGES
+========================= */
+
+.page {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity .7s ease,
+        visibility .7s ease;
+
+    z-index: 10;
+}
+
+.page.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =========================
+   GLASS CARD
+========================= */
+
+.card {
+    width: min(420px, 92vw);
+
+    padding: 30px 22px;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,.38);
+
+    border: 1px solid rgba(255,255,255,.65);
+
+    box-shadow:
+        0 20px 60px rgba(180,70,130,.18),
+        inset 0 1px 1px rgba(255,255,255,.8);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* Shine */
+
+.card::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    left: -150%;
+    top: 0;
+
+    background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(255,255,255,.35),
+        transparent
+    );
+
+    animation: shine 6s infinite;
+}
+
+@keyframes shine {
+
+    0% {
+        left: -150%;
+    }
+
+    50%,100% {
+        left: 150%;
+    }
+}
+
+
+/* =========================
+   GIFS
+========================= */
+
+.gif {
+    width: 150px;
+    max-width: 70%;
+    border-radius: 20px;
+    margin-bottom: 18px;
+
+    filter:
+        drop-shadow(0 8px 15px rgba(200,70,140,.2));
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+h1 {
+    color: #b52d71;
+    font-size: 29px;
+    margin-bottom: 12px;
+}
+
+p {
+    color: #8c4167;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.small {
+    font-size: 14px;
+    opacity: .8;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+button {
+    border: none;
+    border-radius: 999px;
+
+    padding: 13px 24px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(190,70,130,.18);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+button:active {
+    transform: scale(.93);
+}
+
+.yes {
+    background: linear-gradient(135deg,#ff72ae,#ff4f9b);
+    color: white;
+}
+
+.yes:hover {
+    transform: scale(1.06);
+    box-shadow: 0 10px 30px rgba(255,70,150,.35);
+}
+
+.next {
+    background: rgba(255,255,255,.7);
+    color: #b52d71;
+}
+
+
+/* =========================
+   BUTTON AREA
+========================= */
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    position: relative;
+
+    min-height: 58px;
+}
+
+.no {
+    background: white;
+    color: #c44b83;
+
+    position: relative;
+
+    z-index: 200;
+}
+
+
+/* =========================
+   MOVING NO PLAY AREA
+========================= */
+
+#playArea {
+    position: fixed;
+
+    left: 12px;
+    right: 12px;
+
+    top: 70px;
+    bottom: 12px;
+
+    pointer-events: none;
+
+    z-index: 100;
+}
+
+#playArea .no {
+    pointer-events: auto;
+}
+
+
+/* =========================
+   SUCCESS
+========================= */
+
+.success-title {
+    font-size: 32px;
+    color: #e03383;
+
+    animation: pop .7s ease;
+}
+
+@keyframes pop {
+
+    0% {
+        transform: scale(.5);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+/* Small mobile adjustment */
+
+@media(max-width:380px) {
+
+    .card {
+        padding: 24px 17px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    button {
+        padding: 11px 20px;
+        font-size: 14px;
+    }
+
+    .gif {
+        width: 125px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+
+<div id="cuteBackground"></div>
+
+
+<section id="page1" class="page active">
+
+    <div class="card">
+
+        <img
+        class="gif"
+        src="HyperRabbit _ Very Good !!! (1).gif"
+        alt="cute gif"
+        >
+
+        <h1>Hiii... 🥹💗</h1>
+
+        <p>
+            Okayyy... I have something tiny to say...
+        </p>
+
+        <p>
+            It's kinda cute... kinda scary...
+            and maybe a little embarrassing 🙈
+        </p>
+
+        <p class="small">
+            But before that...
+            you have to continue 👉👈
+        </p>
+
+        <button class="next" onclick="goToPage2()">
+            Okayyy 💕
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<section id="page2" class="page">
+
+    <div class="card">
+
+        <img
+        class="gif"
+        src="Love Heartbeat Sticker - Love Heartbeat Heart - Discover & Share GIFs.gif"
+        alt="heart gif"
+        >
+
+        <h1>Okay... here goes nothing 🥹</h1>
+
+        <p>
+            Will you be my person? 💗
+        </p>
+
+        <div class="buttons">
+
+            <button
+            class="yes"
+            onclick="sayYes()">
+                YAYYYY 💗
+            </button>
+
+            <button
+            class="no"
+            id="noButton"
+            onclick="moveNo(event)">
+                No 😭
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<section id="success" class="page">
+
+    <div class="card">
+
+        <img
+        class="gif"
+        src="Good Job Good GIF - Good Job Good Good Girl - Discover & Share GIFs.gif"
+        alt="celebration gif"
+        >
+
+        <h1 class="success-title">
+            YAYYYYY!!! 🥹💗✨
+        </h1>
+
+        <p>
+            I knew you had a little YES somewhere in there 😭💕
+        </p>
+
+        <p>
+            Okay... now enjoy the moment ✨🌸
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<div id="playArea"></div>
+
+
+
+<audio
+    id="song"
+    src="%23KEVIN%20RATER%20-%20I%20LOVE%20U%20-%20%28%20VOC.KEVIN%20RATER%20%29%20OFFICIAL%20VIDEO%20LYRIC%202020%20%5BjqniPwwxoOI%5D%20%5Bdefault%5D%20%282%29.mp3"
+    preload="auto">
+</audio>
+
+
+
+<script>
+
+/* =====================================
+   CREATE LOTS OF CUTE BACKGROUND ANIMATION
+===================================== */
+
+const bg = document.getElementById("cuteBackground");
+
+
+/* Flowers */
+
+const flowers = [
+    "🌸",
+    "🌷",
+    "🌺",
+    "🌼",
+    "💮",
+    "🌹",
+    "🪻",
+    "🌸",
+    "🌷"
+];
+
+for(let i = 0; i < 45; i++) {
+
+    const flower = document.createElement("div");
+
+    flower.className = "flower";
+
+    flower.textContent =
+        flowers[Math.floor(Math.random() * flowers.length)];
+
+    flower.style.left =
+        Math.random() * 100 + "%";
+
+    flower.style.fontSize =
+        (12 + Math.random() * 17) + "px";
+
+    flower.style.animationDuration =
+        (5 + Math.random() * 8) + "s";
+
+    flower.style.animationDelay =
+        (-Math.random() * 10) + "s";
+
+    bg.appendChild(flower);
+}
+
+
+
+/* Hearts */
+
+for(let i = 0; i < 25; i++) {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.textContent =
+        Math.random() > .5 ? "💗" : "💕";
+
+    heart.style.left =
+        Math.random() * 100 + "%";
+
+    heart.style.fontSize =
+        (12 + Math.random() * 18) + "px";
+
+    heart.style.animationDuration =
+        (6 + Math.random() * 8) + "s";
+
+    heart.style.animationDelay =
+        (-Math.random() * 12) + "s";
+
+    bg.appendChild(heart);
+}
+
+
+
+/* Sparkles */
+
+for(let i = 0; i < 45; i++) {
+
+    const sparkle = document.createElement("div");
+
+    sparkle.className = "sparkle";
+
+    sparkle.textContent =
+        Math.random() > .5 ? "✦" : "✧";
+
+    sparkle.style.left =
+        Math.random() * 100 + "%";
+
+    sparkle.style.top =
+        Math.random() * 100 + "%";
+
+    sparkle.style.fontSize =
+        (8 + Math.random() * 12) + "px";
+
+    sparkle.style.color = "white";
+
+    sparkle.style.animationDelay =
+        (-Math.random() * 4) + "s";
+
+    bg.appendChild(sparkle);
+}
+
+
+
+/* Bubbles */
+
+for(let i = 0; i < 22; i++) {
+
+    const bubble = document.createElement("div");
+
+    bubble.className = "bubble";
+
+    const size =
+        8 + Math.random() * 28;
+
+    bubble.style.width = size + "px";
+    bubble.style.height = size + "px";
+
+    bubble.style.left =
+        Math.random() * 100 + "%";
+
+    bubble.style.animationDuration =
+        (7 + Math.random() * 8) + "s";
+
+    bubble.style.animationDelay =
+        (-Math.random() * 12) + "s";
+
+    bg.appendChild(bubble);
+}
+
+
+
+/* Glowing dots */
+
+for(let i = 0; i < 30; i++) {
+
+    const dot = document.createElement("div");
+
+    dot.className = "dot";
+
+    dot.style.left =
+        Math.random() * 100 + "%";
+
+    dot.style.top =
+        Math.random() * 100 + "%";
+
+    dot.style.animationDelay =
+        (-Math.random() * 5) + "s";
+
+    bg.appendChild(dot);
+}
+
+
+
+/* =====================================
+   PAGE SWITCH
+===================================== */
+
+function goToPage2() {
+
+    document
+        .getElementById("page1")
+        .classList.remove("active");
+
+    document
+        .getElementById("page2")
+        .classList.add("active");
+}
+
+
+
+/* =====================================
+   NO BUTTON
+===================================== */
+
+const noButton =
+    document.getElementById("noButton");
+
+const playArea =
+    document.getElementById("playArea");
+
+
+let noStartedMoving = false;
+
+
+
+function moveNo(event) {
+
+    if(event) {
+
+        event.preventDefault();
+
+        event.stopPropagation();
+    }
+
+
+    /* First tap:
+       move button into the safe play area */
+
+    if(!noStartedMoving) {
+
+        noStartedMoving = true;
+
+        playArea.appendChild(noButton);
+
+        noButton.style.position = "absolute";
+
+        noButton.style.transition =
+            "left .55s ease, top .55s ease";
+
+        noButton.style.left = "50%";
+
+        noButton.style.top = "50%";
+
+        noButton.style.transform =
+            "translate(-50%, -50%)";
+    }
+
+
+    /*
+       Wait a tiny moment so browser
+       calculates the button dimensions.
+    */
+
+    requestAnimationFrame(() => {
+
+        const area =
+            playArea.getBoundingClientRect();
+
+        const button =
+            noButton.getBoundingClientRect();
+
+
+        const safe = 8;
+
+
+        /*
+           Calculate a position that ALWAYS
+           keeps the complete button inside
+           the visible play area.
+        */
+
+        const maxX =
+            Math.max(
+                safe,
+                area.width - button.width - safe
+            );
+
+        const maxY =
+            Math.max(
+                safe,
+                area.height - button.height - safe
+            );
+
+
+        let x =
+            safe +
+            Math.random() *
+            Math.max(1, maxX - safe);
+
+
+        let y =
+            safe +
+            Math.random() *
+            Math.max(1, maxY - safe);
+
+
+        /*
+           Extra safety clamp.
+        */
+
+        x = Math.max(
+            safe,
+            Math.min(x, maxX)
+        );
+
+        y = Math.max(
+            safe,
+            Math.min(y, maxY)
+        );
+
+
+        noButton.style.transform = "none";
+
+        noButton.style.left =
+            x + "px";
+
+        noButton.style.top =
+            y + "px";
+
+    });
+}
+
+
+
+/* =====================================
+   YES BUTTON
+===================================== */
+
+const song =
+    document.getElementById("song");
+
+const START_TIME = 117; // 1:57 in seconds
+
+
+
+function sayYes() {
+
+    /* Hide NO immediately */
+
+    noButton.style.display = "none";
+
+
+    /* Change page */
+
+    document
+        .getElementById("page2")
+        .classList.remove("active");
+
+    document
+        .getElementById("success")
+        .classList.add("active");
+
+
+    /*
+       Start song at 1:57
+    */
+
+    song.currentTime = START_TIME;
+    song.play().catch(function(error) {
+        console.log("Audio playback failed:", error);
+    });
+}
+
+
+
+/* =====================================
+   LOOP SONG FROM 1:57
+===================================== */
+
+song.addEventListener("ended", () => {
+
+    song.currentTime = START_TIME;
+
+    song.play().catch(() => {});
+
+});
+
+
+
+/* =====================================
+   STOP SONG WHEN PAGE IS LEFT
+===================================== */
+
+window.addEventListener(
+    "pagehide",
+    () => {
+        song.pause();
+    }
+);
+
+window.addEventListener(
+    "beforeunload",
+    () => {
+        song.pause();
+    }
+);
+
+</script>
+
+</body>
+</html>
